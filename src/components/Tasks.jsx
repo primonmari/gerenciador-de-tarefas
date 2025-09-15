@@ -1,14 +1,14 @@
-import { ChevronRight, TrashIcon } from "lucide-react";
+import { CheckIcon, ChevronRight, TrashIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 
-export default function Tasks({tasks, onTaskClick, onTaskDeleteTaskClick}) {
-   const navigate = useNavigate();
+export default function Tasks({ tasks, onTaskClick, onTaskDeleteTaskClick }) {
+  const navigate = useNavigate();
 
   function onSeeDetailsClick(task) {
-    const query = new URLSearchParams()
-    query.set("title", task.title)
-    query.set("description", task.description)
+    const query = new URLSearchParams();
+    query.set("title", task.title);
+    query.set("description", task.description);
     // query.set("isCompleted", task.isCompleted)
     navigate(`/task?${query.toString()}`);
   }
@@ -19,14 +19,15 @@ export default function Tasks({tasks, onTaskClick, onTaskDeleteTaskClick}) {
           <li key={task.id} className="flex gap-2">
             <button
               onClick={() => onTaskClick(task.id)}
-              className={`bg-slate-400 w-full text-white p-2 rounded-md ${
+              className={`bg-slate-400 w-full flex items-center gap-2 text-white p-2 rounded-md ${
                 task.isCompleted && "line-through"
               }`}
             >
+              {task.isCompleted && <CheckIcon />}
               {task.title}
               {/* {task.isCompleted ? "COMPLETE" : "INCOMPLETE"} */}
             </button>
-            <Button onClick={()=> onSeeDetailsClick(task)} >
+            <Button onClick={() => onSeeDetailsClick(task)}>
               <ChevronRight />
             </Button>
 
